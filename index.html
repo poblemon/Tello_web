@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio Combinacional: Escrutinio y Quine-McCluskey</title>
+    <title>Laboratorio Combinacional: Escrutinio y Quine-McCluskey Dinámico</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -24,8 +24,8 @@
         .glow-emerald {
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
-        .glow-amber {
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        .glow-sky {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
         }
         /* Glassmorphism card effects */
         .glass-card {
@@ -50,27 +50,27 @@
         }
     </style>
 </head>
-<body class="bg-slate-955 bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+<body class="bg-slate-950 bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
     <!-- Header -->
     <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-3">
-            <div class="p-2.5 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-xl shadow-lg shadow-indigo-500/10">
-                <i class="fa-solid fa-layer-group text-xl text-white animate-pulse"></i>
+            <div class="p-2.5 bg-gradient-to-br from-indigo-500 via-sky-500 to-emerald-500 rounded-xl shadow-lg shadow-indigo-500/10">
+                <i class="fa-solid fa-microchip text-xl text-white animate-pulse"></i>
             </div>
             <div>
-                <h1 class="font-black text-xl tracking-tight bg-gradient-to-r from-indigo-200 via-slate-100 to-pink-300 bg-clip-text text-transparent">LOGIC-CANVAS V2</h1>
-                <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Módulos Especiales: Escrutinio & Quine-McCluskey</p>
+                <h1 class="font-black text-xl tracking-tight bg-gradient-to-r from-indigo-200 via-slate-100 to-sky-300 bg-clip-text text-transparent">LOGIC-CANVAS PRO</h1>
+                <p class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Laboratorio Universal de Minimización</p>
             </div>
         </div>
         <div class="flex gap-2">
-            <button onclick="switchSection('esc-sec')" id="nav-esc" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
+            <button onclick="switchSection('esc-sec')" id="nav-esc" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:bg-slate-800 hover:text-white">
                 <i class="fa-solid fa-gavel"></i>
                 Escrutinio (Ej 16)
             </button>
-            <button onclick="switchSection('qm-sec')" id="nav-qm" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-table-cells"></i>
-                Quine-McCluskey (5 Var)
+            <button onclick="switchSection('qm-sec')" id="nav-qm" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-sky-600 text-white shadow-md shadow-sky-600/20">
+                <i class="fa-solid fa-calculator"></i>
+                Quine-McCluskey Dinámico
             </button>
         </div>
     </header>
@@ -79,7 +79,7 @@
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-8 space-y-8">
 
         <!-- SECTION 1: EJERCICIO 16 - ESCRUTINIO EMPRESARIAL -->
-        <section id="esc-sec" class="space-y-6 block">
+        <section id="esc-sec" class="space-y-6 hidden">
             <div class="border-b border-slate-800/60 pb-4">
                 <div class="flex items-center gap-2 text-xs font-bold text-indigo-400 uppercase tracking-widest">
                     <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
@@ -257,28 +257,72 @@
             </div>
         </section>
 
-        <!-- SECTION 2: QUINE-MCCLUSKEY INTERACTIVE BOARD -->
-        <section id="qm-sec" class="space-y-6 hidden">
+        <!-- SECTION 2: QUINE-MCCLUSKEY INTERACTIVE BOARD (DYNAMICAL) -->
+        <section id="qm-sec" class="space-y-6 block">
             <div class="border-b border-slate-800/60 pb-4">
-                <div class="flex items-center gap-2 text-xs font-bold text-sky-400 uppercase tracking-widest">
-                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
-                    Optimización Combinacional
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-sky-400 uppercase tracking-widest">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-ping"></span>
+                            Algoritmo Tabular Dinámico
+                        </div>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">Minimizador de N Variables Universal</h2>
+                        <p class="text-sm text-slate-400 mt-1">
+                            Ingresa libremente el número de variables y selecciona los minitérminos. El sistema calculará la reducción óptima al instante.
+                        </p>
+                    </div>
+                    <!-- CONTROL GENERAL -->
+                    <div class="flex flex-wrap gap-3 items-center">
+                        <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl">
+                            <span class="text-xs font-bold text-slate-400">Variables:</span>
+                            <select id="qm-vars" onchange="changeVariablesCount(this.value)" class="bg-slate-950 text-sky-400 text-xs font-bold rounded p-1 border border-slate-800 focus:outline-none">
+                                <option value="2">2 (A, B)</option>
+                                <option value="3">3 (A, B, C)</option>
+                                <option value="4">4 (A, B, C, D)</option>
+                                <option value="5" selected>5 (A, B, C, D, E)</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="clearAllMinterms()" class="px-3 py-1.5 rounded-xl bg-red-950/20 text-red-400 border border-red-500/20 text-xs font-bold hover:bg-red-950/40 transition">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Limpiar
+                            </button>
+                            <button onclick="loadExercisePreset('5b')" class="px-3 py-1.5 rounded-xl bg-slate-900 text-sky-400 border border-slate-800 text-xs font-bold hover:border-sky-500/40 transition">
+                                <i class="fa-solid fa-cloud-arrow-down mr-1"></i> Cargar Preset
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="text-3xl font-extrabold text-white mt-1">Minimizador de 5 Variables</h2>
-                <p class="text-sm text-slate-400 mt-1 max-w-4xl">
-                    Visualiza detalladamente el algoritmo de <strong class="text-sky-300">Quine-McCluskey (Tabular)</strong> para reducir la función lógica de cinco variables:
-                    <br>
-                    <code class="text-xs bg-slate-950 text-sky-300 px-2 py-1 rounded mt-2 inline-block font-semibold">G(A,B,C,D,E) = Σ m(0, 1, 4, 5, 13, 15, 20, 21, 22, 23, 24, 26, 28, 30, 31)</code>
-                </p>
             </div>
 
-            <!-- Tab Navigation for Step-By-Step -->
+            <!-- INTERACTIVE SELECTION GRID -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-circle-dot text-sky-400"></i>
+                            Matriz de Selección Lógica
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Haz clic para rotar el estado de cada celda: <span class="text-slate-500 font-bold">Inactivo (0)</span> ➔ <span class="text-sky-400 font-bold">Minitérmino (1)</span> ➔ <span class="text-amber-400 font-bold">Don't Care (X)</span>.</p>
+                    </div>
+                    <div class="flex gap-3 text-xs">
+                        <span class="flex items-center gap-1.5 text-slate-400"><span class="w-3 h-3 rounded bg-slate-800 border border-slate-700 block"></span> Inactivo</span>
+                        <span class="flex items-center gap-1.5 text-sky-400"><span class="w-3 h-3 rounded bg-sky-500/20 border border-sky-500 block"></span> Minitérmino (1)</span>
+                        <span class="flex items-center gap-1.5 text-amber-400"><span class="w-3 h-3 rounded bg-amber-500/20 border border-amber-500 block"></span> Don't Care (X)</span>
+                    </div>
+                </div>
+
+                <div id="qm-grid-container" class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-16 gap-2">
+                    <!-- Populated Dynamically by Variables choice -->
+                </div>
+            </div>
+
+            <!-- TAB NAVIGATION -->
             <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-2">
                 <button onclick="switchQmTab('group-tab')" id="qm-btn-group" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg bg-sky-600 text-white transition shadow-md shadow-sky-600/10">1. Agrupamiento</button>
                 <button onclick="switchQmTab('pairs-tab')" id="qm-btn-pairs" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">2. Combinación (Pares)</button>
-                <button onclick="switchQmTab('quads-tab')" id="qm-btn-quads" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">3. Reducción (Quads)</button>
-                <button onclick="switchQmTab('chart-tab')" id="qm-btn-chart" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">4. Gráfico Implicantes Primos</button>
-                <button onclick="switchQmTab('eval-tab')" id="qm-btn-eval" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">5. Banco de Pruebas (Simulador)</button>
+                <button onclick="switchQmTab('quads-tab')" id="qm-btn-quads" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">3. Reducción (Bloques)</button>
+                <button onclick="switchQmTab('chart-tab')" id="qm-btn-chart" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">4. Matriz de Cobertura (EPI)</button>
+                <button onclick="switchQmTab('eval-tab')" id="qm-btn-eval" class="qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:bg-slate-800 transition">5. Simulador Dinámico</button>
             </div>
 
             <!-- TAB 1: AGRUPAMIENTO -->
@@ -286,13 +330,12 @@
                 <div class="glass-card rounded-2xl p-6">
                     <h3 class="text-base font-bold text-white mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-shapes text-sky-400"></i>
-                        Paso 1: Clasificación de Minitérminos por Peso de Unos (Hund/Hamming)
+                        Paso 1: Clasificación por Peso de Unos (Hund/Hamming)
                     </h3>
                     <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-                        En el método tabular, el primer paso consiste en agrupar los minitérminos originales basándonos en el número de bits encendidos (unos) en sus equivalentes binarios de 5 variables ($A, B, C, D, E$).
+                        Clasificación de minitérminos y don't cares según el número de bits en '1' (unos) que contienen sus formas binarias correspondientes.
                     </p>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4" id="groupings-container">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4" id="dynamic-groupings-container">
                         <!-- Populated dynamically -->
                     </div>
                 </div>
@@ -303,23 +346,22 @@
                 <div class="glass-card rounded-2xl p-6">
                     <h3 class="text-base font-bold text-white mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-arrows-split-up-and-left text-sky-400"></i>
-                        Paso 2: Combinación de Minitérminos Adyacentes (Columnas Combinatorias de 1er Nivel)
+                        Paso 2: Combinación de Minitérminos Adyacentes (Nivel 1)
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">
-                        Comparamos parejas de minitérminos pertenecientes a grupos contiguos cuya distancia de Hamming sea exactamente 1 (un bit de diferencia). El bit variante se reemplaza por un guion bajo (<code class="text-sky-300">_</code>).
+                        Comparamos parejas que difieran en exactamente 1 bit en posiciones homólogas para colocar el guion bajo (<code class="text-sky-300">_</code>).
                     </p>
-
                     <div class="overflow-x-auto rounded-xl border border-slate-800/80">
                         <table class="w-full text-center text-xs code-font border-collapse">
                             <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
                                 <tr>
                                     <th class="p-3">Combinación</th>
-                                    <th class="p-3">Código Binario Combinado ($A B C D E$)</th>
-                                    <th class="p-3">Implicante Lógico Provisional</th>
-                                    <th class="p-3">¿Sigue Combinándose?</th>
+                                    <th class="p-3">Estructura Binaria</th>
+                                    <th class="p-3">Términos Lógicos</th>
+                                    <th class="p-3">Estado</th>
                                 </tr>
                             </thead>
-                            <tbody id="pairs-table-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
+                            <tbody id="dynamic-pairs-table-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
                                 <!-- Generated Dynamically -->
                             </tbody>
                         </table>
@@ -327,28 +369,27 @@
                 </div>
             </div>
 
-            <!-- TAB 3: REDUCCIÓN A QUADS -->
+            <!-- TAB 3: REDUCCIÓN DE BLOQUES -->
             <div id="qm-quads-tab" class="qm-tab-content hidden space-y-4">
                 <div class="glass-card rounded-2xl p-6">
                     <h3 class="text-base font-bold text-white mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-compress text-sky-400"></i>
-                        Paso 3: Combinación de Pares en Bloques de Cuatro (Quads)
+                        Paso 3: Reducciones Sucesivas (Quads/Octas)
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">
-                        Combinamos parejas obtenidas en el paso 2 que difieran en una única posición de bit y posean el guion bajo en el mismo lugar, formando grupos de 4 minitérminos cubiertos.
+                        Combinaciones de segundo nivel e iteraciones superiores. Muestra los bloques resultantes que cubren 4, 8 o más términos.
                     </p>
-
                     <div class="overflow-x-auto rounded-xl border border-slate-800/80">
                         <table class="w-full text-center text-xs code-font border-collapse">
                             <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
                                 <tr>
                                     <th class="p-3">Minitérminos Cubiertos</th>
-                                    <th class="p-3">Estructura Binaria</th> 
-                                    <th class="p-3">Implicante Primo Resultante</th>
-                                    <th class="p-3 text-slate-300">Designación</th>
+                                    <th class="p-3">Estructura Binaria</th>
+                                    <th class="p-3">Implicante Primo Provisional</th>
+                                    <th class="p-3">Nivel</th>
                                 </tr>
                             </thead>
-                            <tbody id="quads-table-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
+                            <tbody id="dynamic-quads-table-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
                                 <!-- Generated Dynamically -->
                             </tbody>
                         </table>
@@ -356,27 +397,27 @@
                 </div>
             </div>
 
-            <!-- TAB 4: GRÁFICO DE IMPLICANTES PRIMOS -->
+            <!-- TAB 4: MATRIZ DE COBERTURA DE IMPLICANTES -->
             <div id="qm-chart-tab" class="qm-tab-content hidden space-y-4">
                 <div class="glass-card rounded-2xl p-6 space-y-6">
                     <div>
                         <h3 class="text-base font-bold text-white mb-2 flex items-center gap-2">
                             <i class="fa-solid fa-table text-sky-400"></i>
-                            Paso 4: Matriz de Cobertura e Implicantes Primos Esenciales (EPIs)
+                            Paso 4: Matriz de Cobertura de Implicantes Primos Esenciales (EPIs)
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Interacciona con la matriz de implicantes primos. Los implicantes marcados con <span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold">EPI</span> son obligatorios debido a que son los únicos en cubrir determinados minitérminos (columnas con un solo marcador).
+                            Los implicantes esenciales (<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">EPI</span>) son seleccionados obligatoriamente para cubrir aquellos minitérminos que solo disponen de un implicante candidato en su columna.
                         </p>
                     </div>
 
                     <div class="overflow-x-auto rounded-xl border border-slate-800/80">
                         <table class="w-full text-center text-xs code-font border-collapse">
                             <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
-                                <tr id="chart-header">
+                                <tr id="dynamic-chart-header">
                                     <!-- Headers generated dynamically -->
                                 </tr>
                             </thead>
-                            <tbody id="chart-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
+                            <tbody id="dynamic-chart-body" class="divide-y divide-slate-850/60 bg-slate-900/20">
                                 <!-- Generated Dynamically -->
                             </tbody>
                         </table>
@@ -386,8 +427,8 @@
                     <div class="p-5 rounded-2xl bg-sky-950/20 border border-sky-500/20 space-y-3">
                         <span class="text-xs font-bold text-sky-300 uppercase tracking-wider block">Fórmula Booleana Simplificada Óptima (SOP):</span>
                         <div class="p-3 bg-slate-950 border border-slate-800/80 rounded-xl text-sm font-semibold code-font text-sky-300 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                            <span>G = A'B'D' + AB'C + ABE' + ACD + A'BCE</span>
-                            <span class="text-[10px] px-2.5 py-1 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">5 Términos / 16 Literales</span>
+                            <span id="dynamic-final-formula">Calculando fórmula...</span>
+                            <span id="dynamic-formula-stats" class="text-[10px] px-2.5 py-1 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">0 Términos</span>
                         </div>
                     </div>
                 </div>
@@ -401,44 +442,25 @@
                         Paso 5: Simulador de Verificación Combinatoria
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">
-                        Modifica los bits de entrada ($A, B, C, D, E$) para ver cómo se calculan la función original de minitérminos y la expresión óptima. Ambos resultados deben coincidir en su totalidad, validando la reducción.
+                        Modifica los bits de entrada para ver cómo se calculan la función original de minitérminos y la expresión simplificada.
                     </p>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         <!-- Inputs -->
                         <div class="lg:col-span-5 space-y-4">
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Bits de Selección</span>
-                            <div class="grid grid-cols-5 gap-2">
-                                <button onclick="toggleQmBit('A')" id="qm-btn-A" class="p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center">
-                                    <span class="text-[9px] text-slate-500 mb-1">A (MSB)</span>
-                                    <span class="text-lg text-slate-400" id="qm-val-A">0</span>
-                                </button>
-                                <button onclick="toggleQmBit('B')" id="qm-btn-B" class="p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center">
-                                    <span class="text-[9px] text-slate-500 mb-1">B</span>
-                                    <span class="text-lg text-slate-400" id="qm-val-B">0</span>
-                                </button>
-                                <button onclick="toggleQmBit('C')" id="qm-btn-C" class="p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center">
-                                    <span class="text-[9px] text-slate-500 mb-1">C</span>
-                                    <span class="text-lg text-slate-400" id="qm-val-C">0</span>
-                                </button>
-                                <button onclick="toggleQmBit('D')" id="qm-btn-D" class="p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center">
-                                    <span class="text-[9px] text-slate-500 mb-1">D</span>
-                                    <span class="text-lg text-slate-400" id="qm-val-D">0</span>
-                                </button>
-                                <button onclick="toggleQmBit('E')" id="qm-btn-E" class="p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center">
-                                    <span class="text-[9px] text-slate-500 mb-1">E (LSB)</span>
-                                    <span class="text-lg text-slate-400" id="qm-val-E">0</span>
-                                </button>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Bits de Selección de Entrada</span>
+                            <div class="grid grid-cols-5 gap-2" id="dynamic-simulator-buttons">
+                                <!-- Simulator input buttons go here -->
                             </div>
 
                             <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800/80 space-y-2 text-xs">
                                 <div class="flex justify-between">
                                     <span class="text-slate-400">Equivalente Decimal:</span>
-                                    <span id="qm-decimal" class="font-bold text-white">0</span>
+                                    <span id="dynamic-qm-decimal" class="font-bold text-white">0</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-slate-400 font-medium">¿Pertenece a la lista original de minitérminos?:</span>
-                                    <span id="qm-in-list" class="font-bold text-emerald-400">Sí</span>
+                                    <span id="dynamic-qm-in-list" class="font-bold text-emerald-400">Sí</span>
                                 </div>
                             </div>
                         </div>
@@ -448,41 +470,22 @@
                             <div class="space-y-4">
                                 <!-- Ecuación Desglose -->
                                 <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Verificación de Términos Individuales:</span>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs code-font">
-                                        <div id="check-term-1" class="p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center">
-                                            <span>A'B'D' (0,1,4,5)</span>
-                                            <span class="font-bold text-rose-500">Inactivo</span>
-                                        </div>
-                                        <div id="check-term-2" class="p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center">
-                                            <span>AB'C (20,21,22,23)</span>
-                                            <span class="font-bold text-rose-500">Inactivo</span>
-                                        </div>
-                                        <div id="check-term-3" class="p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center">
-                                            <span>ABE' (24,26,28,30)</span>
-                                            <span class="font-bold text-rose-500">Inactivo</span>
-                                        </div>
-                                        <div id="check-term-4" class="p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center">
-                                            <span>ACD (22,23,30,31)</span>
-                                            <span class="font-bold text-rose-500">Inactivo</span>
-                                        </div>
-                                        <div id="check-term-5" class="p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center col-span-1 sm:col-span-2">
-                                            <span>A'BCE (13,15)</span>
-                                            <span class="font-bold text-rose-500">Inactivo</span>
-                                        </div>
+                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Verificación de Términos Simplificados:</span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs code-font" id="dynamic-check-terms-container">
+                                        <!-- Term verification items go here -->
                                     </div>
                                 </div>
 
                                 <!-- LED de Salida -->
-                                <div id="qm-out-card" class="p-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 flex items-center justify-between transition-all duration-300">
+                                <div id="dynamic-qm-out-card" class="p-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 flex items-center justify-between transition-all duration-300">
                                     <div class="flex items-center gap-3">
-                                        <div id="qm-led" class="w-4 h-4 rounded-full bg-emerald-500 shadow shadow-emerald-500/50"></div>
+                                        <div id="dynamic-qm-led" class="w-4 h-4 rounded-full bg-emerald-500 shadow shadow-emerald-500/50"></div>
                                         <div>
-                                            <span class="block text-xs font-bold uppercase tracking-wider text-emerald-400" id="qm-led-title">SALIDA G = 1</span>
-                                            <span class="text-[10px] text-slate-400">Verificado de manera idéntica mediante SOP simplificada</span>
+                                            <span class="block text-xs font-bold uppercase tracking-wider text-emerald-400" id="dynamic-qm-led-title">SALIDA G = 1</span>
+                                            <span class="text-[10px] text-slate-400">Verificación idéntica mediante SOP simplificada</span>
                                         </div>
                                     </div>
-                                    <span class="text-2xl font-black code-font text-emerald-400" id="qm-out-val">1</span>
+                                    <span class="text-2xl font-black code-font text-emerald-400" id="dynamic-qm-out-val">1</span>
                                 </div>
                             </div>
                         </div>
@@ -495,42 +498,64 @@
 
     <!-- Footer -->
     <footer class="bg-slate-950 border-t border-slate-800/80 py-6 px-6 text-center text-xs text-slate-500">
-        <p>© 2026 Logic-Canvas • Soluciones Óptimas para los Ejercicios 16 y Quine-McCluskey.</p>
+        <p>© 2026 Logic-Canvas PRO • Solución Dinámica de Quine-McCluskey Universal.</p>
     </footer>
 
     <!-- JAVASCRIPT LOGIC ENGINE -->
     <script>
         // Global variables state
         const state = {
+            activeSection: 'qm-sec',
             esc: {
-                A: 0,
-                B: 0,
-                C: 0,
-                D: 0,
-                V: false // validation button
+                A: 0, B: 0, C: 0, D: 0, V: false
             },
             qm: {
-                A: 0,
-                B: 0,
-                C: 0,
-                D: 0,
-                E: 0
+                numVars: 5,
+                // Array representing state of each miniterm. Index = miniterm index.
+                // Value: 0 (Inactive), 1 (Active Minterm), 2 (Don't Care)
+                states: new Array(32).fill(0),
+                simInputs: { A: 0, B: 0, C: 0, D: 0, E: 0 },
+                solved: {
+                    primeImplicants: [],
+                    essentialPrimeImplicants: [],
+                    finalTerms: [],
+                    groupings: [],
+                    pairs: [],
+                    higherCombinations: []
+                }
             }
         };
 
-        // Onload init
+        // Standard presets for Quine-McCluskey
+        const PRESETS = {
+            '5b': {
+                vars: 5,
+                minterms: [0, 1, 4, 5, 13, 15, 20, 21, 22, 23, 24, 26, 28, 30, 31],
+                dontCares: []
+            },
+            '7a': {
+                vars: 4,
+                minterms: [0, 1, 4, 5, 6, 8, 9, 13, 14],
+                dontCares: []
+            },
+            '7b': {
+                vars: 4,
+                minterms: [0, 1, 2, 4, 5, 8, 10],
+                dontCares: []
+            }
+        };
+
         window.onload = function() {
+            // Load preset on startup
+            loadExercisePreset('5b');
             renderVoteTable();
             calcEscrutinio();
-            renderQmGroupings();
-            renderQmPairs();
-            renderQmQuads();
-            renderQmChart();
-            updateQmEvaluator();
+            switchSection('qm-sec');
         };
 
         // Navigation manager
         function switchSection(secId) {
+            state.activeSection = secId;
             document.querySelectorAll('section').forEach(el => el.classList.add('hidden'));
             document.getElementById(secId).classList.remove('hidden');
 
@@ -546,7 +571,6 @@
             }
         }
 
-        // Switch Tab within Quine McCluskey
         function switchQmTab(tabId) {
             document.querySelectorAll('.qm-tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('qm-' + tabId).classList.remove('hidden');
@@ -557,12 +581,11 @@
 
             const currentBtn = document.getElementById('qm-btn-' + tabId.replace('-tab', ''));
             if (currentBtn) {
-                // Determine color
                 currentBtn.className = "qm-tab-btn px-4 py-2 text-xs font-bold rounded-lg bg-sky-600 text-white transition shadow-md shadow-sky-600/15";
             }
         }
 
-        // EJERCICIO 16: Computar escrutinio en tiempo real
+        // --- SECTION 1: ESCRUTINIO LÓGICO ---
         function calcEscrutinio() {
             state.esc.A = document.getElementById('vote-a').checked ? 1 : 0;
             state.esc.B = document.getElementById('vote-b').checked ? 1 : 0;
@@ -573,8 +596,6 @@
 
             // Update gauge UI
             document.getElementById('gauge-pct').textContent = sum + '%';
-            
-            // Set dashoffset. Max circumference is 251.2
             const circumference = 251.2;
             const offset = circumference - (sum / 100) * circumference;
             document.getElementById('gauge-circle').setAttribute('stroke-dashoffset', offset);
@@ -597,23 +618,18 @@
                 gaugeStatus.className = "text-[9px] font-bold text-emerald-400 uppercase tracking-widest mt-0.5";
             }
 
-            // Real logic calculations with formula
             const v = state.esc.V;
             const a = state.esc.A;
             const b = state.esc.B;
             const c = state.esc.C;
             const d = state.esc.D;
 
-            // Formulas:
-            // L1 = V * (A + B(C+D))
-            // L0 = V * (AB + ACD + A'B'C + A'B C'D')
             const l1_logical = (a || (b && (c || d))) ? 1 : 0;
             const l0_logical = ((a && b) || (a && c && d) || (!a && !b && c) || (!a && b && !c && !d)) ? 1 : 0;
 
             const l1 = v ? l1_logical : 0;
             const l0 = v ? l0_logical : 0;
 
-            // LEDs UI updates
             const led1 = document.getElementById('led-l1');
             const led0 = document.getElementById('led-l0');
             const led1Txt = document.getElementById('led-l1-txt');
@@ -639,18 +655,13 @@
                 led0Txt.className = "text-xs font-semibold text-slate-500 uppercase mt-4";
             }
 
-            // Highlight current state row in Table
             document.querySelectorAll('tr[id^="vote-row-"]').forEach(row => {
                 row.className = "border-b border-slate-800 hover:bg-slate-800/20";
             });
             const stateIdx = (a * 8) + (b * 4) + (c * 2) + d;
             const activeRow = document.getElementById('vote-row-' + stateIdx);
             if (activeRow) {
-                if (v) {
-                    activeRow.className = "bg-indigo-600/20 text-indigo-200 border-y border-indigo-500 font-semibold";
-                } else {
-                    activeRow.className = "bg-slate-800/40 text-slate-300 font-semibold";
-                }
+                activeRow.className = v ? "bg-indigo-600/20 text-indigo-200 border-y border-indigo-500 font-semibold" : "bg-slate-800/40 text-slate-300 font-semibold";
             }
         }
 
@@ -671,7 +682,6 @@
             calcEscrutinio();
         }
 
-        // Render truth table dynamically
         function renderVoteTable() {
             const tbody = document.getElementById('vote-table-body');
             tbody.innerHTML = '';
@@ -683,12 +693,6 @@
                 const d = (i & 1) ? 1 : 0;
 
                 const sum = (a * 40) + (b * 35) + (c * 15) + (d * 10);
-                
-                // Ranges:
-                // Sum <= 10 -> 00
-                // 10 < Sum <= 35 -> 01
-                // 35 < Sum <= 60 -> 10
-                // Sum > 60 -> 11
                 let l1 = 0, l0 = 0, range = "";
                 if (sum <= 10) {
                     l1 = 0; l0 = 0; range = "≤ 10%";
@@ -703,7 +707,6 @@
                 const tr = document.createElement('tr');
                 tr.id = "vote-row-" + i;
                 tr.className = "border-b border-slate-800 hover:bg-slate-800/20";
-
                 tr.innerHTML = `
                     <td class="p-2 border-r border-slate-800/80 font-bold text-slate-500">${i}</td>
                     <td class="${a ? 'text-indigo-400 font-bold' : 'text-slate-600'}">${a}</td>
@@ -719,76 +722,361 @@
             }
         }
 
-        // QUINE-MCCLUSKEY INTERACTIVE DATASETS
-        const qmData = {
-            minterms: [0, 1, 4, 5, 13, 15, 20, 21, 22, 23, 24, 26, 28, 30, 31],
-            groups: [
-                { id: 0, ones: 0, m: [0], bin: ["00000"] },
-                { id: 1, ones: 1, m: [1, 4], bin: ["00001", "00100"] },
-                { id: 2, ones: 2, m: [5, 20, 24], bin: ["00101", "10100", "11000"] },
-                { id: 3, ones: 3, m: [13, 21, 22, 26, 28], bin: ["01101", "10101", "10110", "11010", "11100"] },
-                { id: 4, ones: 4, m: [15, 23, 30], bin: ["01111", "10111", "11110"] },
-                { id: 5, ones: 5, m: [31], bin: ["11111"] }
-            ],
-            pairs: [
-                { combination: "0,1", binary: "0000_", implicant: "A'B'C'D'", reduce: true },
-                { combination: "0,4", binary: "00_00", implicant: "A'B'D'E'", reduce: true },
-                { combination: "1,5", binary: "00_01", implicant: "A'B'D'E", reduce: true },
-                { combination: "4,5", binary: "0010_", implicant: "A'B'CD'", reduce: true },
-                { combination: "4,20", binary: "_0100", implicant: "B'CD'E'", reduce: true },
-                { combination: "5,13", binary: "0_101", implicant: "A'CD'E", reduce: false }, // Prime Implicant
-                { combination: "5,21", binary: "_0101", implicant: "B'CD'E", reduce: true },
-                { combination: "20,21", binary: "1010_", implicant: "AB'CD'", reduce: true },
-                { combination: "20,22", binary: "101_0", implicant: "AB'CE'", reduce: true },
-                { combination: "20,28", binary: "1_100", implicant: "ACD'E'", reduce: true },
-                { combination: "24,26", binary: "110_0", implicant: "ABD'E'", reduce: true },
-                { combination: "24,28", binary: "11_00", implicant: "ABE'E'", reduce: true },
-                { combination: "21,23", binary: "101_1", implicant: "AB'CE", reduce: true },
-                { combination: "22,30", binary: "1_110", implicant: "ACE'E'", reduce: true },
-                { combination: "26,30", binary: "11_10", implicant: "ABE'E'", reduce: true },
-                { combination: "28,30", binary: "111_0", implicant: "ABCE'", reduce: true },
-                { combination: "13,15", binary: "011_1", implicant: "A'BCE", reduce: false }, // Prime Implicant
-                { combination: "22,23", binary: "1011_", implicant: "AB'CD", reduce: true },
-                { combination: "15,31", binary: "_1111", implicant: "BCDE", reduce: false }, // Prime Implicant
-                { combination: "23,31", binary: "1_111", implicant: "ACDE", reduce: true },
-                { combination: "30,31", binary: "1111_", implicant: "ABCD", reduce: true }
-            ],
-            quads: [
-                { combination: "0,1,4,5", binary: "00_0_", implicant: "A'B'D'", type: "EPI" },
-                { combination: "4,5,20,21", binary: "_010_", implicant: "B'CD'", type: "PI" },
-                { combination: "20,21,22,23", binary: "101__", implicant: "AB'C", type: "EPI" },
-                { combination: "20,22,28,30", binary: "1_1_0", implicant: "ACE'", type: "PI" },
-                { combination: "24,26,28,30", binary: "11__0", implicant: "ABE'", type: "EPI" },
-                { combination: "22,23,30,31", binary: "1_11_", implicant: "ACD", type: "EPI" }
-            ],
-            chart: [
-                { name: "A'B'D' (0,1,4,5)", term: "A'B'D'", type: "EPI", covers: [0, 1, 4, 5] },
-                { name: "B'CD' (4,5,20,21)", term: "B'CD'", type: "PI", covers: [4, 5, 20, 21] },
-                { name: "AB'C (20,21,22,23)", term: "AB'C", type: "EPI", covers: [20, 21, 22, 23] },
-                { name: "ACE' (20,22,28,30)", term: "ACE'", type: "PI", covers: [20, 22, 28, 30] },
-                { name: "ABE' (24,26,28,30)", term: "ABE'", type: "EPI", covers: [24, 26, 28, 30] },
-                { name: "ACD (22,23,30,31)", term: "ACD", type: "EPI", covers: [22, 23, 30, 31] },
-                { name: "A'CD'E (5,13)", term: "A'CD'E", type: "PI", covers: [5, 13] },
-                { name: "A'BCE (13,15)", term: "A'BCE", type: "EPI", covers: [13, 15] },
-                { name: "BCDE (15,31)", term: "BCDE", type: "PI", covers: [15, 31] }
-            ]
-        };
+        // --- SECTION 2: DINAMIC QUINE-MCCLUSKEY ENGINE ---
+        function changeVariablesCount(val) {
+            const numVars = parseInt(val);
+            state.qm.numVars = numVars;
+            state.qm.states = new Array(Math.pow(2, numVars)).fill(0);
+            
+            // Re-init simulator inputs
+            state.qm.simInputs = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+            
+            rebuildSelectionGrid();
+            recalculateQM();
+        }
 
-        // Render QM step 1 groupings
-        function renderQmGroupings() {
-            const container = document.getElementById('groupings-container');
+        function clearAllMinterms() {
+            state.qm.states.fill(0);
+            rebuildSelectionGrid();
+            recalculateQM();
+        }
+
+        function loadExercisePreset(key) {
+            const preset = PRESETS[key] || PRESETS['5b'];
+            state.qm.numVars = preset.vars;
+            const size = Math.pow(2, preset.vars);
+            state.qm.states = new Array(size).fill(0);
+            
+            preset.minterms.forEach(m => {
+                if (m < size) state.qm.states[m] = 1;
+            });
+            preset.dontCares.forEach(d => {
+                if (d < size) state.qm.states[d] = 2;
+            });
+
+            document.getElementById('qm-vars').value = preset.vars;
+            rebuildSelectionGrid();
+            recalculateQM();
+        }
+
+        function rebuildSelectionGrid() {
+            const container = document.getElementById('qm-grid-container');
             container.innerHTML = '';
+            const size = Math.pow(2, state.qm.numVars);
 
-            qmData.groups.forEach(g => {
+            for (let i = 0; i < size; i++) {
+                const button = document.createElement('button');
+                button.id = `minterm-cell-${i}`;
+                button.className = getCellClass(state.qm.states[i]);
+                button.innerHTML = `
+                    <div class="text-[10px] font-bold text-slate-500">m${i}</div>
+                    <div class="text-xs font-black select-none mt-0.5" id="minterm-val-${i}">${getCellValueChar(state.qm.states[i])}</div>
+                    <div class="text-[8px] opacity-40 font-mono mt-0.5">${decToBinStr(i, state.qm.numVars)}</div>
+                `;
+                button.onclick = () => toggleMintermCell(i);
+                container.appendChild(button);
+            }
+        }
+
+        function getCellClass(st) {
+            const base = "p-2 rounded-xl border transition-all text-center flex flex-col items-center justify-between ";
+            if (st === 0) {
+                return base + "bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700 hover:bg-slate-800/40";
+            } else if (st === 1) {
+                return base + "bg-sky-500/10 border-sky-500 text-sky-400 glow-sky";
+            } else {
+                return base + "bg-amber-500/10 border-amber-500 text-amber-400 glow-amber";
+            }
+        }
+
+        function getCellValueChar(st) {
+            if (st === 0) return "0";
+            if (st === 1) return "1";
+            return "X";
+        }
+
+        function toggleMintermCell(idx) {
+            // Cycle: 0 -> 1 -> 2 -> 0
+            state.qm.states[idx] = (state.qm.states[idx] + 1) % 3;
+            
+            const btn = document.getElementById(`minterm-cell-${idx}`);
+            btn.className = getCellClass(state.qm.states[idx]);
+            document.getElementById(`minterm-val-${idx}`).textContent = getCellValueChar(state.qm.states[idx]);
+            
+            recalculateQM();
+        }
+
+        function decToBinStr(dec, len) {
+            return dec.toString(2).padStart(len, '0');
+        }
+
+        // --- THE CORE ALGORITHM RESOLVER ---
+        function recalculateQM() {
+            const numVars = state.qm.numVars;
+            const states = state.qm.states;
+
+            const activeMinterms = [];
+            const dontCares = [];
+            const allActive = []; // Union of active and dont cares for combination phase
+
+            states.forEach((val, idx) => {
+                if (val === 1) {
+                    activeMinterms.push(idx);
+                    allActive.push({ term: idx, bin: decToBinStr(idx, numVars), weight: countOnes(idx) });
+                } else if (val === 2) {
+                    dontCares.push(idx);
+                    allActive.push({ term: idx, bin: decToBinStr(idx, numVars), weight: countOnes(idx) });
+                }
+            });
+
+            // If there are no active minterms, final formula is simply 0
+            if (activeMinterms.length === 0) {
+                displayZeroSolution();
+                return;
+            }
+
+            // Step 1: Agrupamiento inicial por peso
+            const initialGroups = [];
+            for (let w = 0; w <= numVars; w++) {
+                initialGroups.push({ weight: w, list: [] });
+            }
+
+            allActive.forEach(item => {
+                initialGroups[item.weight].list.push({
+                    combination: [item.term],
+                    bin: item.bin,
+                    combined: false
+                });
+            });
+
+            state.qm.solved.groupings = initialGroups;
+
+            // Step 2 & 3: Sucesivas combinaciones (Pares, Quads, Octas, etc.)
+            let currentLevelGroups = initialGroups.map(g => [...g.list]);
+            let pairsList = [];
+            let higherCombinations = [];
+            let allPrimeImplicants = [];
+
+            let stepCount = 1;
+            let combinedAnything = true;
+
+            while (combinedAnything) {
+                combinedAnything = false;
+                const nextLevelGroups = [];
+                for (let w = 0; w < numVars; w++) {
+                    nextLevelGroups.push([]);
+                }
+
+                // Compare elements of adjacent weight groups
+                for (let w = 0; w < currentLevelGroups.length - 1; w++) {
+                    const groupA = currentLevelGroups[w];
+                    const groupB = currentLevelGroups[w + 1];
+
+                    groupA.forEach(termA => {
+                        groupB.forEach(termB => {
+                            const diffIndex = checkSingleBitDiff(termA.bin, termB.bin);
+                            if (diffIndex !== -1) {
+                                combinedAnything = true;
+                                termA.combined = true;
+                                termB.combined = true;
+
+                                const combinedBin = replaceAt(termA.bin, diffIndex, '-');
+                                const combinedMinterms = Array.from(new Set([...termA.combination, ...termB.combination])).sort((x, y) => x - y);
+
+                                // Check duplicates in next level
+                                const isDup = nextLevelGroups[w].some(el => el.bin === combinedBin);
+                                if (!isDup) {
+                                    const nextItem = {
+                                        combination: combinedMinterms,
+                                        bin: combinedBin,
+                                        combined: false
+                                    };
+                                    nextLevelGroups[w].push(nextItem);
+                                    
+                                    if (stepCount === 1) {
+                                        pairsList.push(nextItem);
+                                    } else {
+                                        higherCombinations.push({
+                                            combination: combinedMinterms,
+                                            bin: combinedBin,
+                                            level: stepCount
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+
+                // Add non-combined terms from current level to prime implicants candidates
+                currentLevelGroups.forEach(g => {
+                    g.forEach(term => {
+                        if (!term.combined) {
+                            allPrimeImplicants.push(term);
+                        }
+                    });
+                });
+
+                currentLevelGroups = nextLevelGroups;
+                stepCount++;
+            }
+
+            // Deduplicate prime implicants
+            const uniquePrimeImplicants = [];
+            allPrimeImplicants.forEach(pi => {
+                const isDup = uniquePrimeImplicants.some(el => el.bin === pi.bin);
+                if (!isDup) {
+                    uniquePrimeImplicants.push(pi);
+                }
+            });
+
+            state.qm.solved.pairs = pairsList;
+            state.qm.solved.higherCombinations = higherCombinations;
+
+            // Step 4: Cobertura de Implicantes Primos Esenciales (EPIs)
+            // Filter columns to contain ONLY active minterms (excluding Don't Cares)
+            const primeChart = [];
+            uniquePrimeImplicants.forEach(pi => {
+                const coveredActiveOnly = pi.combination.filter(m => activeMinterms.includes(m));
+                if (coveredActiveOnly.length > 0) {
+                    primeChart.push({
+                        bin: pi.bin,
+                        expression: convertBinToExpr(pi.bin, numVars),
+                        allCovered: pi.combination,
+                        coveredMinterms: coveredActiveOnly, // Only target true active minterms
+                        isEssential: false
+                    });
+                }
+            });
+
+            // Detect EPIs
+            const mintermCoverageCount = {};
+            activeMinterms.forEach(m => {
+                mintermCoverageCount[m] = [];
+            });
+
+            primeChart.forEach((row, rowIdx) => {
+                row.coveredMinterms.forEach(m => {
+                    if (mintermCoverageCount[m]) {
+                        mintermCoverageCount[m].push(rowIdx);
+                    }
+                });
+            });
+
+            const essentialIndices = new Set();
+            activeMinterms.forEach(m => {
+                const coveringRows = mintermCoverageCount[m];
+                if (coveringRows.length === 1) {
+                    essentialIndices.add(coveringRows[0]);
+                }
+            });
+
+            essentialIndices.forEach(idx => {
+                primeChart[idx].isEssential = true;
+            });
+
+            // Greedily select terms to cover remaining minterms
+            const finalCoverSet = [];
+            const remainingMinterms = new Set(activeMinterms);
+
+            // 1. Add all Essential Prime Implicants first
+            essentialIndices.forEach(idx => {
+                finalCoverSet.push(primeChart[idx]);
+                primeChart[idx].coveredMinterms.forEach(m => remainingMinterms.delete(m));
+            });
+
+            // 2. Cover the rest greedily
+            while (remainingMinterms.size > 0) {
+                let bestRow = null;
+                let maxCovered = -1;
+
+                primeChart.forEach(row => {
+                    if (!finalCoverSet.includes(row)) {
+                        const score = row.coveredMinterms.filter(m => remainingMinterms.has(m)).length;
+                        if (score > maxCovered) {
+                            maxCovered = score;
+                            bestRow = row;
+                        }
+                    }
+                });
+
+                if (bestRow && maxCovered > 0) {
+                    finalCoverSet.push(bestRow);
+                    bestRow.coveredMinterms.forEach(m => remainingMinterms.delete(m));
+                } else {
+                    break;
+                }
+            }
+
+            state.qm.solved.primeImplicants = primeChart;
+            state.qm.solved.finalTerms = finalCoverSet;
+
+            // Render output views
+            renderDynamicQMViews(activeMinterms);
+        }
+
+        function countOnes(num) {
+            return num.toString(2).split('1').length - 1;
+        }
+
+        function checkSingleBitDiff(str1, str2) {
+            let diffIndex = -1;
+            let diffCount = 0;
+            for (let i = 0; i < str1.length; i++) {
+                if (str1[i] !== str2[i]) {
+                    diffCount++;
+                    diffIndex = i;
+                }
+            }
+            return diffCount === 1 ? diffIndex : -1;
+        }
+
+        function replaceAt(str, index, replacement) {
+            return str.substr(0, index) + replacement + str.substr(index + replacement.length);
+        }
+
+        function convertBinToExpr(bin, len) {
+            const vars = ['A', 'B', 'C', 'D', 'E'];
+            let expr = '';
+            for (let i = 0; i < len; i++) {
+                if (bin[i] === '1') expr += vars[i];
+                else if (bin[i] === '0') expr += vars[i] + "'";
+            }
+            return expr === '' ? '1' : expr;
+        }
+
+        function displayZeroSolution() {
+            document.getElementById('dynamic-final-formula').innerHTML = "G = 0";
+            document.getElementById('dynamic-formula-stats').textContent = "0 Términos";
+            document.getElementById('dynamic-groupings-container').innerHTML = '<div class="col-span-full text-center text-xs text-slate-500 py-6">Sin minitérminos activos</div>';
+            document.getElementById('dynamic-pairs-table-body').innerHTML = '<tr><td colspan="4" class="p-4 text-slate-500 text-xs">Sin combinaciones</td></tr>';
+            document.getElementById('dynamic-quads-table-body').innerHTML = '<tr><td colspan="4" class="p-4 text-slate-500 text-xs">Sin combinaciones</td></tr>';
+            document.getElementById('dynamic-chart-header').innerHTML = '';
+            document.getElementById('dynamic-chart-body').innerHTML = '';
+            
+            // Rebuild dynamic simulator views
+            rebuildSimulatorPanel();
+        }
+
+        // --- VIEW RENDERING ENGINE FOR DYNAMIC QM ---
+        function renderDynamicQMViews(activeMinterms) {
+            const numVars = state.qm.numVars;
+
+            // 1. Groupings Step 1 View
+            const groupingContainer = document.getElementById('dynamic-groupings-container');
+            groupingContainer.innerHTML = '';
+            state.qm.solved.groupings.forEach(g => {
+                if (g.list.length === 0) return;
                 const groupCard = document.createElement('div');
                 groupCard.className = "p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col justify-between";
                 
                 let mintermsHtml = '';
-                g.m.forEach((term, idx) => {
+                g.list.forEach(item => {
+                    const isDc = state.qm.states[item.combination[0]] === 2;
                     mintermsHtml += `
                         <div class="flex justify-between items-center text-xs p-1.5 rounded bg-slate-950 border border-slate-850/50">
-                            <span class="font-bold text-sky-400">m${term}</span>
-                            <span class="text-[10px] text-slate-500">${g.bin[idx]}</span>
+                            <span class="font-bold ${isDc ? 'text-amber-400' : 'text-sky-400'}">m${item.combination[0]} ${isDc ? '(X)' : ''}</span>
+                            <span class="text-[10px] text-slate-500 font-mono">${item.bin}</span>
                         </div>
                     `;
                 });
@@ -796,95 +1084,99 @@
                 groupCard.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-3">
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Grupo ${g.ones}</span>
-                            <span class="text-[9px] px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 font-bold">${g.ones} Unos</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Grupo ${g.weight}</span>
+                            <span class="text-[9px] px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 font-bold">${g.weight} Unos</span>
                         </div>
                         <div class="space-y-2">
                             ${mintermsHtml}
                         </div>
                     </div>
                 `;
-                container.appendChild(groupCard);
+                groupingContainer.appendChild(groupCard);
             });
-        }
 
-        // Render QM step 2 combinations
-        function renderQmPairs() {
-            const tbody = document.getElementById('pairs-table-body');
-            tbody.innerHTML = '';
+            // 2. Pairs Table Level 1
+            const pairsTbody = document.getElementById('dynamic-pairs-table-body');
+            pairsTbody.innerHTML = '';
+            if (state.qm.solved.pairs.length === 0) {
+                pairsTbody.innerHTML = '<tr><td colspan="4" class="p-3 text-slate-500 italic">No se encontraron combinaciones de 1er nivel</td></tr>';
+            } else {
+                state.qm.solved.pairs.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-800/10";
+                    tr.innerHTML = `
+                        <td class="p-3 text-sky-300 font-bold">m(${p.combination.join(',')})</td>
+                        <td class="p-3 font-semibold text-slate-200 tracking-wider">${p.bin}</td>
+                        <td class="p-3 text-slate-400 font-mono">${convertBinToExpr(p.bin, numVars)}</td>
+                        <td class="p-3">
+                            ${p.combined ? 
+                                '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">Combinado</span>' : 
+                                '<span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 font-bold">Implicante Primo</span>'
+                            }
+                        </td>
+                    `;
+                    pairsTbody.appendChild(tr);
+                });
+            }
 
-            qmData.pairs.forEach(p => {
+            // 3. Higher Combinations Table (Quads & Blocks)
+            const quadsTbody = document.getElementById('dynamic-quads-table-body');
+            quadsTbody.innerHTML = '';
+            if (state.qm.solved.higherCombinations.length === 0) {
+                quadsTbody.innerHTML = '<tr><td colspan="4" class="p-3 text-slate-500 italic">No se requirieron reducciones de nivel superior (Quads/Octas)</td></tr>';
+            } else {
+                state.qm.solved.higherCombinations.forEach(q => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-800/10";
+                    tr.innerHTML = `
+                        <td class="p-3 text-sky-300 font-bold">m(${q.combination.join(',')})</td>
+                        <td class="p-3 font-semibold text-slate-200 tracking-wider">${q.bin}</td>
+                        <td class="p-3 text-indigo-300 font-bold font-mono">${convertBinToExpr(q.bin, numVars)}</td>
+                        <td class="p-3 text-slate-400 text-[10px] uppercase font-bold">Nivel ${q.level}</td>
+                    `;
+                    quadsTbody.appendChild(tr);
+                });
+            }
+
+            // 4. Implicants Chart Matrix View
+            const chartHeader = document.getElementById('dynamic-chart-header');
+            chartHeader.innerHTML = '<th class="p-3 border-r border-slate-800 bg-slate-950 text-left">Implicantes Primos</th>';
+            activeMinterms.forEach(m => {
+                chartHeader.innerHTML += `<th class="p-2 border-r border-slate-800 text-sky-400 text-xs font-bold bg-slate-950">m${m}</th>`;
+            });
+
+            const chartBody = document.getElementById('dynamic-chart-body');
+            chartBody.innerHTML = '';
+            state.qm.solved.primeImplicants.forEach(imp => {
                 const tr = document.createElement('tr');
+                const isSelectedFinal = state.qm.solved.finalTerms.some(f => f.bin === imp.bin);
+                
+                let highlightClass = "";
+                if (imp.isEssential) {
+                    highlightClass = "border-l-4 border-l-amber-500";
+                } else if (isSelectedFinal) {
+                    highlightClass = "border-l-4 border-l-sky-500";
+                }
+
+                tr.className = `hover:bg-slate-800/20 ${highlightClass}`;
                 tr.innerHTML = `
-                    <td class="p-3 text-sky-300 font-bold">m(${p.combination})</td>
-                    <td class="p-3 font-semibold text-slate-200 tracking-wider">${p.binary}</td>
-                    <td class="p-3 text-slate-400">${p.implicant}</td>
-                    <td class="p-3">
-                        ${p.reduce ? 
-                            '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">Sí (Pasa a Quads)</span>' : 
-                            '<span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20 font-bold">No (Primos)</span>'
+                    <td class="p-3 border-r border-slate-800 text-left flex items-center justify-between gap-3 bg-slate-950/20">
+                        <span class="font-bold text-slate-200 text-xs">${imp.expression} <span class="text-[10px] text-slate-500 font-mono ml-2">(${imp.bin})</span></span>
+                        ${imp.isEssential ? 
+                            '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-black">EPI</span>' : 
+                            isSelectedFinal ? 
+                            '<span class="text-[9px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 font-semibold">Seleccionado</span>' :
+                            '<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-500 font-semibold">PI</span>'
                         }
                     </td>
                 `;
-                tbody.appendChild(tr);
-            });
-        }
 
-        // Render QM step 3 combinations
-        function renderQmQuads() {
-            const tbody = document.getElementById('quads-table-body');
-            tbody.innerHTML = '';
-
-            qmData.quads.forEach(q => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-3 text-sky-300 font-bold">m(${q.combination})</td>
-                    <td class="p-3 font-semibold text-slate-200 tracking-wider">${q.binary}</td>
-                    <td class="p-3 text-indigo-300 font-bold">${q.implicant}</td>
-                    <td class="p-3">
-                        <span class="text-[10px] px-2 py-0.5 rounded ${q.type === 'EPI' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/20' : 'bg-slate-800 text-slate-400'} font-bold">
-                            ${q.type}
-                        </span>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        // Render Prime Implicant matrix chart
-        function renderQmChart() {
-            const header = document.getElementById('chart-header');
-            header.innerHTML = '<th class="p-3 border-r border-slate-800 bg-slate-950 text-left">Implicantes Primos</th>';
-            
-            qmData.minterms.forEach(m => {
-                header.innerHTML += `<th class="p-2 border-r border-slate-800 text-sky-400 text-xs font-bold">m${m}</th>`;
-            });
-
-            const tbody = document.getElementById('chart-body');
-            tbody.innerHTML = '';
-
-            qmData.chart.forEach(implicant => {
-                const tr = document.createElement('tr');
-                
-                // Color highlight for essential ones
-                const isEpi = implicant.type === 'EPI';
-                const typeBadge = isEpi ? 
-                    '<span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-black">EPI</span>' : 
-                    '<span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-500 font-semibold">PI</span>';
-
-                tr.innerHTML = `
-                    <td class="p-3 border-r border-slate-800 text-left flex items-center justify-between gap-3 bg-slate-950/20">
-                        <span class="font-bold text-slate-200 text-xs">${implicant.name}</span>
-                        ${typeBadge}
-                    </td>
-                `;
-
-                qmData.minterms.forEach(m => {
-                    const covers = implicant.covers.includes(m);
+                activeMinterms.forEach(m => {
+                    const covers = imp.coveredMinterms.includes(m);
                     if (covers) {
                         tr.innerHTML += `
-                            <td class="p-2 border-r border-slate-800 text-amber-400 text-base font-extrabold bg-indigo-500/5">
-                                <i class="fa-solid fa-square-check text-indigo-400"></i>
+                            <td class="p-2 border-r border-slate-800 text-amber-400 text-base font-extrabold bg-sky-500/5">
+                                <i class="fa-solid fa-square-check text-sky-400"></i>
                             </td>
                         `;
                     } else {
@@ -892,18 +1184,76 @@
                     }
                 });
 
-                tbody.appendChild(tr);
+                chartBody.appendChild(tr);
             });
+
+            // 5. Final Boolean Expression Presentation
+            const formulaText = state.qm.solved.finalTerms.map(f => f.expression).join(' + ');
+            document.getElementById('dynamic-final-formula').innerHTML = `G = ${formulaText || '0'}`;
+            document.getElementById('dynamic-formula-stats').textContent = `${state.qm.solved.finalTerms.length} Término(s) SOP`;
+
+            // 6. Build and reset simulation panel
+            rebuildSimulatorPanel();
         }
 
-        // TEST BENCH SIMULATOR LOGIC
-        function toggleQmBit(bit) {
-            state.qm[bit] = state.qm[bit] === 1 ? 0 : 1;
-            
-            const btn = document.getElementById('qm-btn-' + bit);
-            const span = document.getElementById('qm-val-' + bit);
+        // --- SIMULATOR & TEST BENCH GENERATOR ---
+        function rebuildSimulatorPanel() {
+            const numVars = state.qm.numVars;
+            const simButtonsContainer = document.getElementById('dynamic-simulator-buttons');
+            simButtonsContainer.innerHTML = '';
 
-            if (state.qm[bit] === 1) {
+            const vars = ['A', 'B', 'C', 'D', 'E'];
+            for (let i = 0; i < numVars; i++) {
+                const bitLabel = vars[i];
+                const val = state.qm.simInputs[bitLabel] || 0;
+                
+                const button = document.createElement('button');
+                button.id = `sim-btn-${bitLabel}`;
+                button.onclick = () => toggleSimulatorInput(bitLabel);
+                
+                const isActive = val === 1;
+                button.className = isActive ? 
+                    "p-3 bg-sky-500/10 border border-sky-500 hover:border-sky-400 rounded-xl transition text-center font-bold flex flex-col items-center text-sky-300" :
+                    "p-3 bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl transition text-center font-bold flex flex-col items-center text-slate-400";
+                
+                button.innerHTML = `
+                    <span class="text-[9px] text-slate-500 mb-1">${bitLabel} ${i === 0 ? '(MSB)' : i === numVars-1 ? '(LSB)' : ''}</span>
+                    <span class="text-lg" id="sim-val-${bitLabel}">${val}</span>
+                `;
+                simButtonsContainer.appendChild(button);
+            }
+
+            // Populate the logic verification list items
+            const checkTermsContainer = document.getElementById('dynamic-check-terms-container');
+            checkTermsContainer.innerHTML = '';
+
+            if (state.qm.solved.finalTerms.length === 0) {
+                checkTermsContainer.innerHTML = '<div class="col-span-full p-2.5 text-center text-xs text-slate-500">Sin términos simplificados. G = 0 siempre.</div>';
+            } else {
+                state.qm.solved.finalTerms.forEach((term, idx) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.id = `dynamic-check-term-${idx}`;
+                    itemDiv.className = "p-2.5 rounded bg-slate-950 border border-slate-850 flex justify-between items-center";
+                    itemDiv.innerHTML = `
+                        <span>${term.expression} <span class="text-[10px] text-slate-500 font-mono">(${term.bin})</span></span>
+                        <span class="font-bold text-rose-500" id="dynamic-check-term-status-${idx}">Inactivo</span>
+                    `;
+                    checkTermsContainer.appendChild(itemDiv);
+                });
+            }
+
+            updateSimulatorResult();
+        }
+
+        function toggleSimulatorInput(bitLabel) {
+            state.qm.simInputs[bitLabel] = state.qm.simInputs[bitLabel] === 1 ? 0 : 1;
+            
+            // Re-render button classes inline
+            const btn = document.getElementById(`sim-btn-${bitLabel}`);
+            const span = document.getElementById(`sim-val-${bitLabel}`);
+            const isActive = state.qm.simInputs[bitLabel] === 1;
+
+            if (isActive) {
                 btn.className = "p-3 bg-sky-500/10 border border-sky-500 hover:border-sky-400 rounded-xl transition text-center font-bold flex flex-col items-center text-sky-300";
                 span.textContent = '1';
             } else {
@@ -911,54 +1261,77 @@
                 span.textContent = '0';
             }
 
-            updateQmEvaluator();
+            updateSimulatorResult();
         }
 
-        function updateQmEvaluator() {
-            const a = state.qm.A;
-            const b = state.qm.B;
-            const c = state.qm.C;
-            const d = state.qm.D;
-            const e = state.qm.E;
+        function updateSimulatorResult() {
+            const numVars = state.qm.numVars;
+            const vars = ['A', 'B', 'C', 'D', 'E'];
+            
+            // Compute decimal representation based on variable inputs
+            let binaryAccumulator = '';
+            for (let i = 0; i < numVars; i++) {
+                const bitVal = state.qm.simInputs[vars[i]] || 0;
+                binaryAccumulator += bitVal.toString();
+            }
 
-            const dec = (a * 16) + (b * 8) + (c * 4) + (d * 2) + e;
-            document.getElementById('qm-decimal').textContent = dec;
+            const dec = parseInt(binaryAccumulator, 2);
+            document.getElementById('dynamic-qm-decimal').textContent = dec;
 
-            // Check membership of original minterms list
-            const inList = qmData.minterms.includes(dec);
-            const inListSpan = document.getElementById('qm-in-list');
+            const inList = state.qm.states[dec] === 1;
+            const isDontCare = state.qm.states[dec] === 2;
+            
+            const inListSpan = document.getElementById('dynamic-qm-in-list');
             if (inList) {
                 inListSpan.textContent = 'SÍ (Debería dar G = 1)';
-                inListSpan.className = "font-bold text-emerald-400";
+                inListSpan.className = "font-bold text-emerald-400 animate-pulse";
+            } else if (isDontCare) {
+                inListSpan.textContent = 'Don\'t Care (Resulta opcional)';
+                inListSpan.className = "font-bold text-amber-400";
             } else {
                 inListSpan.textContent = 'NO (Debería dar G = 0)';
                 inListSpan.className = "font-bold text-rose-500";
             }
 
-            // Evaluate terms individually
-            // G = A'B'D' + AB'C + ABE' + ACD + A'BCE
-            const t1 = (!a && !b && !d) ? 1 : 0;
-            const t2 = (a && !b && c) ? 1 : 0;
-            const t3 = (a && b && !e) ? 1 : 0;
-            const t4 = (a && c && d) ? 1 : 0;
-            const t5 = (!a && b && c && e) ? 1 : 0;
+            // Verify term activation status in real-time
+            let finalOutput = 0;
+            state.qm.solved.finalTerms.forEach((term, idx) => {
+                // Check if term.bin matches simulator input binary representation
+                let isActive = true;
+                for (let i = 0; i < numVars; i++) {
+                    const simBit = binaryAccumulator[i];
+                    const termBit = term.bin[i];
+                    if (termBit !== '-' && termBit !== simBit) {
+                        isActive = false;
+                        break;
+                    }
+                }
 
-            const g_val = (t1 || t2 || t3 || t4 || t5) ? 1 : 0;
+                const uiTerm = document.getElementById(`dynamic-check-term-${idx}`);
+                const uiTermStatus = document.getElementById(`dynamic-check-term-status-${idx}`);
+                if (isActive) {
+                    finalOutput = 1;
+                    if (uiTerm && uiTermStatus) {
+                        uiTerm.className = "p-2.5 rounded bg-sky-500/10 border border-sky-500/40 text-sky-300 flex justify-between items-center transition-all animate-pulse";
+                        uiTermStatus.textContent = "Activo (1)";
+                        uiTermStatus.className = "font-bold text-sky-400";
+                    }
+                } else {
+                    if (uiTerm && uiTermStatus) {
+                        uiTerm.className = "p-2.5 rounded bg-slate-950 border border-slate-850 text-slate-500 flex justify-between items-center opacity-40 transition-all";
+                        uiTermStatus.textContent = "Inactivo";
+                        uiTermStatus.className = "font-bold text-slate-700";
+                    }
+                }
+            });
 
-            // Highlight active terms in simulation panel
-            updateTermUi('check-term-1', t1, "A'B'D'");
-            updateTermUi('check-term-2', t2, "AB'C");
-            updateTermUi('check-term-3', t3, "ABE'");
-            updateTermUi('check-term-4', t4, "ACD");
-            updateTermUi('check-term-5', t5, "A'BCE");
+            // Update Simulation Output glow card
+            const card = document.getElementById('dynamic-qm-out-card');
+            const led = document.getElementById('dynamic-qm-led');
+            const title = document.getElementById('dynamic-qm-led-title');
+            const outVal = document.getElementById('dynamic-qm-out-val');
 
-            // Final Simulation Result Glow Card
-            const card = document.getElementById('qm-out-card');
-            const led = document.getElementById('qm-led');
-            const title = document.getElementById('qm-led-title');
-            const outVal = document.getElementById('qm-out-val');
-
-            if (g_val === 1) {
+            if (finalOutput === 1) {
                 card.className = "p-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 flex items-center justify-between transition-all duration-300";
                 led.className = "w-4 h-4 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50 animate-pulse";
                 title.textContent = "SALIDA G = 1 (ACTIVA)";
@@ -972,17 +1345,6 @@
                 title.className = "block text-xs font-bold uppercase tracking-wider text-slate-500";
                 outVal.textContent = "0";
                 outVal.className = "text-2xl font-black code-font text-slate-500";
-            }
-        }
-
-        function updateTermUi(elementId, active, label) {
-            const el = document.getElementById(elementId);
-            if (active) {
-                el.className = "p-2.5 rounded bg-sky-500/10 border border-sky-500/40 text-sky-300 flex justify-between items-center transition-all animate-pulse";
-                el.innerHTML = `<span>${label}</span> <span class="font-bold text-sky-400">Activo (1)</span>`;
-            } else {
-                el.className = "p-2.5 rounded bg-slate-950 border border-slate-850 text-slate-550 flex justify-between items-center opacity-40 transition-all";
-                el.innerHTML = `<span>${label}</span> <span class="font-bold text-slate-700">Inactivo</span>`;
             }
         }
     </script>
